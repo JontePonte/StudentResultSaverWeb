@@ -4,14 +4,14 @@ The system is web based this time and made with the framework Django.
 
 
 -Command line:
-cd DjangoTest
+cd website
 cd ..
 
 -Activate virtual environment without relaunch
 .env/Scripts/Activate.ps1
 
 -To create Django project:
-django-admin startproject DjangoTest
+django-admin startproject website
 
 -To run server type in terminal:
 py manage.py runserver
