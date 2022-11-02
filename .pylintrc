@@ -1,0 +1,2 @@
+# Remove anoying red line in sql
+ignored-classes=SQLObject,Registrant,scoped_session
