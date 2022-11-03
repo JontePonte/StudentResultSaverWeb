@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
+    'main.apps.MainConfig', # This adds dependencies from app to project
+    # 'register.apps.RegisterConfig', # This adds dependencies from app to project
+
 ]
 
 MIDDLEWARE = [
@@ -121,3 +125,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+LOGIN_REDIRECT_URL = "/" # Sends user back to home page instead of users/accounts
+LOGOUT_REDIRECT_URL = "/login" # Sends user back to home page instead of users/accounts
+ 
