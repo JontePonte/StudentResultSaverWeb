@@ -16,7 +16,7 @@ django-admin startproject website
 -To run server type in terminal:
 py manage.py runserver
 
--To create Django-app:
+-To create django-app:
 py manage.py startapp main
 
 -To update (commit) database:
