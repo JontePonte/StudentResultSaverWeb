@@ -28,8 +28,8 @@ py manage.py makemigrations main
 -Get into manual manager control:
 py manage.py shell
 
--My admin is "John_admin" (standard password)
-python manage.py createsuperuser John_admin
+-My admin is "john_admin" (standard password)
+python manage.py createsuperuser
 http://127.0.0.1:8000/admin/
 
 
