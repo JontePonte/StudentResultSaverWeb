@@ -3,4 +3,4 @@ from django.http import HttpResponse
 
 
 def home(response):
-    return render(response, "main/home.html", {"login":True})
+    return render(response, "main/home.html", {"login":False})
