@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'main.apps.MainConfig', # This adds dependencies from app to project
-    # 'register.apps.RegisterConfig', # This adds dependencies from app to project
+    'register.apps.RegisterConfig', # This adds dependencies from app to project
 
 ]
 
