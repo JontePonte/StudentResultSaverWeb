@@ -54,7 +54,7 @@
     </head>
     <body>
         <div class="sidenav">
-            {% if login %}
+            {% if request.user.is_authenticated %}
                 <a href="/home">Home</a>
                 <a href="/classes">Classes</a>
                 <a href="/logout">Logout</a>
