@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', v_reg.register, name="register"),
     path('', include("main.urls")), # include path from main/urls.py
+    path('', include("django.contrib.auth.urls")), # login, logout
 ]
