@@ -14,6 +14,12 @@ def index(response, id):
     if not gr in response.user.group.all():
         return render(response, "main/groups.html", {})
 
+    if response.method == "POST":
+        if response.POST.get("renameSave"):
+            txt = response.POST.get("Rename")
+            gr.name(txt)
+            gr.save()
+
     return render(response, "main/group.html", {"gr":gr})
 
 
