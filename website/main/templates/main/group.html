@@ -3,5 +3,17 @@
 {% block title %}{{gr.name}}{% endblock %}
 
 {% block content %}
-    <h1>{{gr.name}}</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>{{gr.name}}</h1>
+            </div>
+            <div class="col">
+                <div class="input-group-prepend", align="right">
+                    <input type="text", name="Rename">
+                    <button type="submit" name="renameSave" value="renameSave" class="btn btn-success">Rename</button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
