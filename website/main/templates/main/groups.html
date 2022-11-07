@@ -10,7 +10,7 @@
     {% endfor %}
 
     <!-- Create new group -->
-    <form method="post" action="/create/" class="form-group">
+    <form method="post" action="/groups/" class="form-group">
         {% csrf_token %}
         <div class="input-group mb-3">
             {{form.name}} <!-- as_table, as_p, as_ul -->
