@@ -11,12 +11,13 @@ def home(response):
 def index(response, id):
     gr = Group.objects.get(id=id)
 
+    # Safety check so user can't access each other groups
     if not gr in response.user.group.all():
         return render(response, "main/groups.html", {})
 
     if response.method == "POST":
         if response.POST.get("renameSave"):
-            txt = response.POST.get("Rename")
+            txt = response.POST.get("rename")
             gr.name = txt
             gr.save()
 
