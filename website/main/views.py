@@ -29,7 +29,20 @@ def index(response, id):
 
 
 def groups(response):
-    return render(response, "main/groups.html", {})
+    if response.method == "POST":
+        form = CreateNewGroup(response.POST)
+
+        if form.is_valid():
+            n = form.cleaned_data["name"] # Unencrypts data
+            g = Group(name=n)
+            g.save()
+            response.user.group.add(g)
+        
+            return HttpResponseRedirect("/groups/")
+
+    else:
+        form = CreateNewGroup()
+    return render(response, "main/groups.html", {"form":form})
 
 
 def create(response):

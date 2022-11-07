@@ -3,8 +3,20 @@
 {% block title %}Groups{% endblock %}
 
 {% block content %}
+    <!-- List all groups -->
     <h1>Your Groups (Classes)</h1>
     {% for group in user.group.all %}
         <p><a href="/{{group.id}}"><h3>{{group.name}}</h3></a></p>
     {% endfor %}
+
+    <!-- Create new group -->
+    <form method="post" action="/create/" class="form-group">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            {{form.name}} <!-- as_table, as_p, as_ul -->
+            <div class="imput-group-prepend">
+                <button type="submit", name="save" class="btn btn-success"><em>Create new group</em></button>
+            </div>
+        </div>
+    </form>
 {% endblock %}
