@@ -20,7 +20,7 @@ def index(response, id):
             txt = response.POST.get("rename")
             gr.name = txt
             gr.save()
-        if response.POST.get("delete_group"):
+        elif response.POST.get("delete_group"):
             gr.delete()
             return HttpResponseRedirect("/groups/")
 
