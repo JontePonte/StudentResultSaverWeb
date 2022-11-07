@@ -13,8 +13,13 @@
                     {% csrf_token %}
                     <div class="input-group-prepend", align="right">
                         <input type="text", name="rename">
-                        <button type="submit" name="renameSave" value="renameSave" class="btn btn-success">Rename</button>
+                        <button type="submit" name="rename_save" value="rename_save" class="btn btn-success">Rename</button>
                     </div>
+                </form>
+            </div>
+            <div class="col">
+                <form method="POST">
+                    <button type="submit" name="delete_group" value="delete_group" class="btn btn-danger">Delete</button>
                 </form>
             </div>
         </div>

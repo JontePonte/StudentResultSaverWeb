@@ -16,7 +16,7 @@ def index(response, id):
         return render(response, "main/groups.html", {})
 
     if response.method == "POST":
-        if response.POST.get("renameSave"):
+        if response.POST.get("rename_save"):
             txt = response.POST.get("rename")
             gr.name = txt
             gr.save()
