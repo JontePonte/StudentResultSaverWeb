@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.http import HttpResponse
-from .forms import CreateNewGroup
-from .models import Group
+from .forms import CreateNewGroup, CreateNewStudent
+from .models import Group, Student
 
 
 def home(response):
@@ -15,17 +15,30 @@ def index(response, id):
     if not gr in response.user.group.all():
         return render(response, "main/groups.html", {})
 
+
     if response.method == "POST":
-        if response.POST.get("rename_save"):
+        print(response.POST.get("save_rename"))
+        if response.POST.get("save_rename"):
             txt = response.POST.get("rename")
             gr.name = txt
             gr.save()
         elif response.POST.get("delete_group"):
             gr.delete()
             return HttpResponseRedirect("/groups/")
+        elif response.POST.get("save_student"):
+            form_new_student = CreateNewStudent(response.POST)
+            print('almost success')
+            if form_new_student.is_valid():
+                first_name = form_new_student.cleaned_data["first_name"]
+                last_name = form_new_student.cleaned_data["last_name"]
+                st = Student(first_name=first_name, last_name=last_name)
+                st.save()
+                response.gr.student.add(st)
+                print('success')
+        
+    form_new_student = CreateNewStudent()
 
-
-    return render(response, "main/group.html", {"gr":gr})
+    return render(response, "main/group.html", {"gr":gr, "form_new_student":form_new_student})
 
 
 def groups(response):

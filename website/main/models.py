@@ -12,8 +12,9 @@ class Group(models.Model):
     
 
 class Student(models.Model):
-    user = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="student", null=True)
-    name = models.CharField(max_length=300)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="student", null=True)
+    first_name = models.CharField(max_length=300, default="Anna")
+    last_name = models.CharField(max_length=300, default="Andersson")
 
     def __str__(self):
-        return str(self.name)
+        return str(self.first_name) + ' ' + str(self.last_name)

@@ -3,20 +3,24 @@
 {% block title %}{{gr.name}}{% endblock %}
 
 {% block content %}
+    <!-- Name, Rename and Delete are in a single row -->
     <div class="container">
         <div class="row">
+            <!-- Show group name -->
             <div class="col">
                 <h1>{{gr.name}}</h1>
             </div>
+            <!-- Rename group -->
             <div class="col">
                 <form method="POST">
                     {% csrf_token %}
                     <div class="input-group-prepend", align="right">
                         <input type="text", name="rename">
-                        <button type="submit" name="rename_save" value="rename_save" class="btn btn-success">Rename</button>
+                        <button type="submit" name="save_rename" value="save_rename" class="btn btn-success">Rename</button>
                     </div>
                 </form>
             </div>
+            <!-- Delete group -->
             <div class="col">
                 <form method="POST">
                     {% csrf_token %}
@@ -25,4 +29,21 @@
             </div>
         </div>
     </div>
+    
+    <!-- List of students -->
+    {% for student in gr.student.all %}
+        <p>{{student.first_name}}</p>
+    {% endfor %}
+
+    <!-- Add new student -->
+    <form method="post" name="student_save" class="form-group">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            {{form_new_student}} <!-- as_table, as_p, as_ul -->
+            <div class="imput-group-prepend">
+                <button type="submit", name="student_save" value="student_save" class="btn btn-success"><em>Add student</em></button>
+            </div>
+        </div>
+    </form>
+
 {% endblock %}
