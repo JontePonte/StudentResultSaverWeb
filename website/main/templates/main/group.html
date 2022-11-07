@@ -19,6 +19,7 @@
             </div>
             <div class="col">
                 <form method="POST">
+                    {% csrf_token %}
                     <button type="submit" name="delete_group" value="delete_group" class="btn btn-danger">Delete</button>
                 </form>
             </div>
