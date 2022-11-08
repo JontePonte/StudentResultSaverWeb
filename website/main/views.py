@@ -39,17 +39,14 @@ def group(response, id):
 
 
 def student(response, id):
-    return render(response, "main/home.html", {})
-    # st = Student.objects.get(id=id)
-    # gr = st.objects.group.all()
+    st = Student.objects.get(id=id)
 
     # print(gr.name)
 
     # # Safety check so user can't access each other groups
     # if not gr in response.user.group.all():
     #     return render(response, "main/groups.html", {})
-
-
+    return render(response, "main/student.html", {"st":st,})
 
 
 def groups(response):
