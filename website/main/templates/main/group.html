@@ -1,6 +1,7 @@
 {% extends "main/base.html" %}
 
 {% block title %}{{gr.name}}{% endblock %}
+{% load crispy_forms_tags %}
 
 {% block content %}
     <!-- Name, Rename and Delete are in a single row -->
@@ -38,9 +39,13 @@
     <!-- Add new student -->
     <form method="post" name="save_student" class="form-group">
         {% csrf_token %}
-        <div class="input-group mb-3">
-            {{form_new_student}} <!-- as_table, as_p, as_ul -->
-            <div class="imput-group-prepend">
+        <div class="row">
+            <div class="col">
+                <div class="input-group mb-3">
+                    {{form_new_student|crispy}} <!-- as_table, as_p, as_ul -->
+                </div>
+            </div>
+            <div class="col">
                 <button type="submit", name="save_student" value="save_student" class="btn btn-success"><em>Add student</em></button>
             </div>
         </div>
