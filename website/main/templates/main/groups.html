@@ -6,7 +6,7 @@
     <!-- List all groups -->
     <h1>Your Groups (Classes)</h1>
     {% for group in user.group.all %}
-        <p><a href="/{{group.id}}"><h3>{{group.name}}</h3></a></p>
+        <p><a href="/group/{{group.id}}"><h3>{{group.name}}</h3></a></p>
     {% endfor %}
 
     <!-- Create new group -->
