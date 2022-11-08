@@ -8,7 +8,7 @@ def home(response):
     return render(response, "main/home.html", {})
 
 
-def index(response, id):
+def group(response, id):
     gr = Group.objects.get(id=id)
 
     # Safety check so user can't access each other groups
