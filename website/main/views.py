@@ -32,7 +32,6 @@ def index(response, id):
                 st = Student(first_name=first_name, last_name=last_name)
                 st.save()
                 gr.student.add(st)
-                print('success')
         
     form_new_student = CreateNewStudent()
 

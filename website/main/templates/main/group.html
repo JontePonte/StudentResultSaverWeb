@@ -32,7 +32,7 @@
     
     <!-- List of students -->
     {% for student in gr.student.all %}
-        <p>{{student.first_name}}</p>
+        <p>{{student.first_name}} {{student.last_name}}</p>
     {% endfor %}
 
     <!-- Add new student -->
