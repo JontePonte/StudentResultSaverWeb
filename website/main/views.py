@@ -46,6 +46,18 @@ def student(response, id):
     # # Safety check so user can't access each other groups
     # if not gr in response.user.group.all():
     #     return render(response, "main/groups.html", {})
+
+    if response.method == "POST":
+        if response.POST.get("save_rename"):
+            first_new = response.POST.get("rename_first")
+            last_new = response.POST.get("rename_last")
+            st.first_name = first_new
+            st.last_name = last_new
+            st.save()
+        elif response.POST.get("delete_student"):
+            st.delete()
+            return HttpResponseRedirect("/groups/")
+
     return render(response, "main/student.html", {"st":st,})
 
 
