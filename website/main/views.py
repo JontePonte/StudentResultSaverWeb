@@ -17,7 +17,6 @@ def index(response, id):
 
 
     if response.method == "POST":
-        print(response.POST.get("save_rename"))
         if response.POST.get("save_rename"):
             txt = response.POST.get("rename")
             gr.name = txt
@@ -27,13 +26,12 @@ def index(response, id):
             return HttpResponseRedirect("/groups/")
         elif response.POST.get("save_student"):
             form_new_student = CreateNewStudent(response.POST)
-            print('almost success')
             if form_new_student.is_valid():
                 first_name = form_new_student.cleaned_data["first_name"]
                 last_name = form_new_student.cleaned_data["last_name"]
                 st = Student(first_name=first_name, last_name=last_name)
                 st.save()
-                response.gr.student.add(st)
+                gr.student.add(st)
                 print('success')
         
     form_new_student = CreateNewStudent()

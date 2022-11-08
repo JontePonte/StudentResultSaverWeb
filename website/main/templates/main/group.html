@@ -36,12 +36,12 @@
     {% endfor %}
 
     <!-- Add new student -->
-    <form method="post" name="student_save" class="form-group">
+    <form method="post" name="save_student" class="form-group">
         {% csrf_token %}
         <div class="input-group mb-3">
             {{form_new_student}} <!-- as_table, as_p, as_ul -->
             <div class="imput-group-prepend">
-                <button type="submit", name="student_save" value="student_save" class="btn btn-success"><em>Add student</em></button>
+                <button type="submit", name="save_student" value="save_student" class="btn btn-success"><em>Add student</em></button>
             </div>
         </div>
     </form>
