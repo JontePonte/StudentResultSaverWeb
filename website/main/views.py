@@ -38,6 +38,20 @@ def group(response, id):
     return render(response, "main/group.html", {"gr":gr, "form_new_student":form_new_student})
 
 
+def student(response, id):
+    return render(response, "main/home.html", {})
+    # st = Student.objects.get(id=id)
+    # gr = st.objects.group.all()
+
+    # print(gr.name)
+
+    # # Safety check so user can't access each other groups
+    # if not gr in response.user.group.all():
+    #     return render(response, "main/groups.html", {})
+
+
+
+
 def groups(response):
     if response.method == "POST":
         form = CreateNewGroup(response.POST)

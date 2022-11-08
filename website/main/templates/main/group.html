@@ -33,7 +33,7 @@
     
     <!-- List of students -->
     {% for student in gr.student.all %}
-        <p>{{student.first_name}} {{student.last_name}}</p>
+        <p><a href="/student/{{student.id}}">{{student.first_name}} {{student.last_name}}</a></p>
     {% endfor %}
 
     <!-- Add new student -->
