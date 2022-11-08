@@ -39,15 +39,10 @@
     <!-- Add new student -->
     <form method="post" name="save_student" class="form-group">
         {% csrf_token %}
-        <div class="row">
-            <div class="col">
-                <div class="input-group mb-3">
-                    {{form_new_student|crispy}} <!-- as_table, as_p, as_ul -->
-                </div>
-            </div>
-            <div class="col">
-                <button type="submit", name="save_student" value="save_student" class="btn btn-success"><em>Add student</em></button>
-            </div>
+        <div class="input-group mb-3">
+            {{form_new_student.first_name}} <!-- as_table, as_p, as_ul -->
+            {{form_new_student.last_name}} <!-- as_table, as_p, as_ul -->
+            <button type="submit", name="save_student" value="save_student" class="btn btn-success"><em>Add student</em></button>
         </div>
     </form>
 
