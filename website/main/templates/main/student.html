@@ -3,5 +3,28 @@
 {% block title %}{{st.first_name}}{{st.last_name}}{% endblock %}
 
 {% block content %}
-    <h1>Student</h1>
+    
+    <!-- Name, Rename and Delete are in a single row -->
+    <div class="container">
+        <div class="row">
+            <!-- Show name and enable rename student -->
+            <div class="col">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="input-group-prepend">
+                        <h3><input type="text", name="rename_first", placeholder="{{st.first_name}}"></h3>
+                        <h3><input type="text", name="rename_last", placeholder="{{st.last_name}}"></h3>
+                        <h3><button type="submit" name="save_rename" value="save_rename" class="btn btn-success">Rename</button></h3>
+                    </div>
+                </form>
+            </div>
+            <!-- Delete group -->
+            <div class="col">
+                <form method="POST">
+                    {% csrf_token %}
+                    <button type="submit" name="delete_student" value="delete_student" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}
