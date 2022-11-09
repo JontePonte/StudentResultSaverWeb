@@ -40,8 +40,8 @@ def group(response, id):
 
 def student(response, id):
     st = Student.objects.get(id=id)
+    gr = st.group
 
-    # print(gr.name)
 
     # # Safety check so user can't access each other groups
     # if not gr in response.user.group.all():
@@ -56,7 +56,7 @@ def student(response, id):
             st.save()
         elif response.POST.get("delete_student"):
             st.delete()
-            return HttpResponseRedirect("/groups/")
+            return HttpResponseRedirect(f"/group/{gr.id}")
 
     return render(response, "main/student.html", {"st":st,})
 
