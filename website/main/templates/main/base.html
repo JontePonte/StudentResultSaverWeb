@@ -3,30 +3,6 @@
 <html>
     <head>
         <style type="text/css">
-            .sidenav {
-                height: 100%;
-                width: 200px;
-                position: fixed;
-                z-index: 1;
-                top: 0;
-                left: 0;
-                background-color: #111;
-                overflow-x: hidden;
-                padding-top: 20px;
-            }
-
-            .sidenav a {
-                padding: 6px 8px 6px 18px;
-                text-decoration: none;
-                font-size: 25px;
-                color: #818181;
-                display: block;
-            }
-
-            .sidenav a:hover {
-                color: #f1f1f1;
-            }
-
             .main {
                 margin-left: 200px;
                 padding: 0px 10px;
@@ -56,33 +32,40 @@
 
     <body>
         
-        <div class="sidenav">
-            {% if request.user.is_authenticated %}
-            <a href="/home">Home</a>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="/groups/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Groups
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/groups/">All Groups</a></li>
-                <li><hr class="dropdown-divider"></li>
-                {% for group in request.user.group.all %}
-                  <li><a class="dropdown-item" href="/group/{{group.id}}">{{group.name}}</a></li>
-                {% endfor %}
-              </ul>
-            </li>
-            <a href="/logout">Logout</a>
-            {% else %}
-                <a href="/login">Login</a>
-                <a href="/register">Sign Up</a>
-            {% endif %}
-        </div>
-
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="/home">StudentResultSaver</a>
+              
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/home/">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle nav-link active" href="/groups/" role="button" data-bs-toggle="dropdown" aria-expanded="false">Groups</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/groups/">View all Groups</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            {% for group in request.user.group.all %}
+                                <li><a class="dropdown-item" href="/group/{{group.id}}">{{group.name}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/logout">Logout</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/register">Sign Up</a></li>
+                    {% endif %}
+                </ul>
+              </div>
+            </div>
+          </nav>
 
         <div class="main", id="content", name="content">
             <div class="row justify-content-center">
                 <div class="col-8">
-                    <h1 class="mt-2">StudentResultSaver</h1>
                     <hr class="mt-0 mb-4">
 
                         {% block content %}
