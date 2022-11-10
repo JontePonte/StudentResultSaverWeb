@@ -29,9 +29,9 @@ class Exam(models.Model):
     points_max_c = models.FloatField()
     # User can choose to set limits in the system or fix manually
     set_limit = models.BooleanField(default=False)
-    points_grade_e_e = models.FloatField(default=0)
-    points_grade_d_e = models.FloatField(default=0)
-    points_grade_d_c = models.FloatField(default=0)
+    points_grade_e_e = models.FloatField(default=0) # E requires only E-points
+    points_grade_d_e = models.FloatField(default=0) # D requires E and C points
+    points_grade_d_c = models.FloatField(default=0) # ...
     points_grade_c_e = models.FloatField(default=0)
     points_grade_c_C = models.FloatField(default=0)
     points_grade_b_e = models.FloatField(default=0)
@@ -67,5 +67,6 @@ class Assignment(models.Model):
 class AssignmentResult(models.Model):
     assignment = models.ForeignKey(Assignment, on_delete=models.SET_NULL, related_name="assignment_result", null=True)
     student = models.ForeignKey(Student, on_delete=models.SET_NULL, related_name="assignment_result", null=True)
+    # This is only set by user, no automatic function
     result = models.CharField(max_length=100)
 
