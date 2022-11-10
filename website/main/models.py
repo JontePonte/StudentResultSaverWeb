@@ -18,3 +18,22 @@ class Student(models.Model):
 
     def __str__(self):
         return str(self.first_name) + ' ' + str(self.last_name)
+
+
+class Exam(models.Model):
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="exam", null=True)
+
+
+class ExamResult(models.Model):
+    exam = models.ForeignKey(Group, on_delete=models.SET_NULL, related_name="exam_result", null=True)
+    student = models.ForeignKey(Student, on_delete=models.SET_NULL, related_name="exam_result", null=True)
+
+
+class Assignment(models.Model):
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="assignment", null=True)
+
+
+class AssignmentResult(models.Model):
+    assignment = models.ForeignKey(Group, on_delete=models.SET_NULL, related_name="assignment_result", null=True)
+    student = models.ForeignKey(Student, on_delete=models.SET_NULL, related_name="assignment_result", null=True)
+
