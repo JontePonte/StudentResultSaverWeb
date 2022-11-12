@@ -80,6 +80,22 @@ def student(response, id):
 
 def exam(response, id):
     exam = Exam.objects.get(id=id)
+    gr = exam.group
+
+    # Safety check so user can't access each other groups
+    if not gr in response.user.group.all():
+        return render(response, "main/groups/.html", {})
+
+
+    if response.method == "POST":
+        # Edit, delete exam
+        if response.POST.get("save_rename"):
+            txt = response.POST.get("rename")
+            exam.name = txt
+            exam.save()
+        elif response.POST.get("delete_exam"):
+            exam.delete()
+            return HttpResponseRedirect(f"/group/{gr.id}")
 
     return render(response, "main/exam.html", {"exam":exam})
 

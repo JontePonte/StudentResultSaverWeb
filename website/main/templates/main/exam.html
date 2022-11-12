@@ -3,7 +3,21 @@
 {% block title %}{{exam.name}}{% endblock %}
 
 {% block content %}
-    <h1>{{exam.name}}</h1>
-
+<div class="row">
+    <form class="row g-3" method="POST">
+        <!-- Rename exam -->
+        {% csrf_token %}
+        <div class="col-auto">
+            <h3><input type="text" name="rename" placeholder="{{exam.name}}"></h3>
+        </div>
+        <div class="col-auto">
+            <button type="submit" name="save_rename" value="save_rename" class="btn btn-success">Rename</button>
+        </div>
+        <!-- Delete group -->
+        <div class="col-auto">
+            <button type="submit" name="delete_exam" value="delete_exam" class="btn btn-danger">Delete</button>
+        </div>
+    </form>
+</div>
 {% endblock %}
     
