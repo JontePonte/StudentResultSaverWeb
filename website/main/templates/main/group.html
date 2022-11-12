@@ -25,18 +25,36 @@
     </div>
     
     <!-- List of students -->
-    {% for student in gr.student.all %}
-        <p><a href="/student/{{student.id}}">{{student.first_name}} {{student.last_name}}</a></p>
-    {% endfor %}
-
-    <!-- Add new student -->
-    <form method="post" name="save_student" class="form-group">
-        {% csrf_token %}
-        <div class="input-group mb-3">
-            {{form_new_student.first_name}} <!-- as_table, as_p, as_ul -->
-            {{form_new_student.last_name}} <!-- as_table, as_p, as_ul -->
-            <button type="submit", name="save_student" value="save_student" class="btn btn-success"><em>Add new student</em></button>
+    <div class="row">
+        <div class="col-auto">
+            {% for student in gr.student.all %}
+                <p><a href="/student/{{student.id}}">{{student.first_name}} {{student.last_name}}</a></p>
+            {% endfor %}
+        
+            <!-- Add new student -->
+            <form method="post" name="save_student" class="form-group">
+                {% csrf_token %}
+                <div class="input-group mb-3">
+                    {{form_new_student.first_name}} <!-- as_table, as_p, as_ul -->
+                    {{form_new_student.last_name}} <!-- as_table, as_p, as_ul -->
+                    <button type="submit", name="save_student" value="save_student" class="btn btn-success"><em>Add new student</em></button>
+                </div>
+            </form>
         </div>
-    </form>
+        <div class="col-auto">
+            {% for exam in gr.exam.all %}
+                <p><a href="/exam/{{exam.id}}">{{exam.name}}</a></p>
+            {% endfor %}
+        
+            <!-- Add new exam -->
+            <form method="post" name="save_exam" class="form-group">
+                {% csrf_token %}
+                <div class="input-group mb-3">
+                    {{form_new_exam}} <!-- as_table, as_p, as_ul -->
+                    <button type="submit", name="save_exam" value="save_exam" class="btn btn-success"><em>Add new exam</em></button>
+                </div>
+            </form>
+        </div>
+    </div>
 
 {% endblock %}
