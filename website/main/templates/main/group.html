@@ -7,27 +7,20 @@
     <!-- Name, Rename and Delete are in a single row -->
     <div class="container">
         <div class="row">
-            <!-- Show group name -->
-            <div class="col">
-                <h1>{{gr.name}}</h1>
-            </div>
-            <!-- Rename group -->
-            <div class="col">
-                <form method="POST">
-                    {% csrf_token %}
-                    <div class="input-group-prepend", align="right">
-                        <input type="text", name="rename">
-                        <button type="submit" name="save_rename" value="save_rename" class="btn btn-success">Rename</button>
-                    </div>
-                </form>
-            </div>
-            <!-- Delete group -->
-            <div class="col">
-                <form method="POST">
-                    {% csrf_token %}
+            <form class="row g-3" method="POST">
+                <!-- Rename group -->
+                {% csrf_token %}
+                <div class="col-auto">
+                    <h3><input type="text" name="rename" placeholder="{{gr.name}}"></h3>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" name="save_rename" value="save_rename" class="btn btn-success">Rename</button>
+                </div>
+                <!-- Delete group -->
+                <div class="col-auto">
                     <button type="submit" name="delete_group" value="delete_group" class="btn btn-danger">Delete</button>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
     
