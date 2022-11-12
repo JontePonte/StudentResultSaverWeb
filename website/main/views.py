@@ -50,6 +50,11 @@ def student(response, id):
         if response.POST.get("save_rename"):
             first_new = response.POST.get("rename_first")
             last_new = response.POST.get("rename_last")
+            # First and last name is not changed if input is empty
+            if not first_new:
+                first_new = st.first_name
+            if not last_new:
+                last_new = st.last_name
             st.first_name = first_new
             st.last_name = last_new
             st.save()
