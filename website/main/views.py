@@ -78,6 +78,12 @@ def student(response, id):
     return render(response, "main/student.html", {"st":st,})
 
 
+def exam(response, id):
+    exam = Exam.objects.get(id=id)
+
+    return render(response, "main/exam.html", {"exam":exam})
+
+
 def groups(response):
     if response.method == "POST":
         form = CreateNewGroup(response.POST)
