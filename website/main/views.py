@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.http import HttpResponse
-from .forms import CreateNewGroup, CreateNewStudent
-from .models import Group, Student
+from .forms import CreateNewGroup, CreateNewStudent, CreateNewExam
+from .models import Group, Student, Exam, ExamResult, Assignment, AssignmentResult
 
 
 def home(response):
@@ -17,6 +17,7 @@ def group(response, id):
 
 
     if response.method == "POST":
+        # Edit, delete group
         if response.POST.get("save_rename"):
             txt = response.POST.get("rename")
             gr.name = txt
@@ -24,6 +25,7 @@ def group(response, id):
         elif response.POST.get("delete_group"):
             gr.delete()
             return HttpResponseRedirect("/groups/")
+        # ADd student
         elif response.POST.get("save_student"):
             form_new_student = CreateNewStudent(response.POST)
             if form_new_student.is_valid():
@@ -32,10 +34,21 @@ def group(response, id):
                 st = Student(first_name=first_name, last_name=last_name)
                 st.save()
                 gr.student.add(st)
-        
+        # Add exam
+        elif response.POST.get("save_exam"):
+            form_new_exam = CreateNewExam(response.POST)
+            if form_new_exam.is_valid():
+                name = form_new_exam.cleaned_data["name"]
+                ex = Exam(name=name)
+                ex.save()
+                gr.exam.add(ex)
+    
+    # Empty exam info
     form_new_student = CreateNewStudent()
+    form_new_exam = CreateNewExam()
 
-    return render(response, "main/group.html", {"gr":gr, "form_new_student":form_new_student})
+
+    return render(response, "main/group.html", {"gr":gr, "form_new_student":form_new_student, "form_new_exam":form_new_exam})
 
 
 def student(response, id):

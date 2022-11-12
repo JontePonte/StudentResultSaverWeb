@@ -50,7 +50,7 @@
             <form method="post" name="save_exam" class="form-group">
                 {% csrf_token %}
                 <div class="input-group mb-3">
-                    {{form_new_exam}} <!-- as_table, as_p, as_ul -->
+                    {{form_new_exam.name}} <!-- as_table, as_p, as_ul -->
                     <button type="submit", name="save_exam" value="save_exam" class="btn btn-success"><em>Add new exam</em></button>
                 </div>
             </form>

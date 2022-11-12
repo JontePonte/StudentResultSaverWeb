@@ -24,9 +24,9 @@ class Exam(models.Model):
     group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="exam", null=True)
     name = models.CharField(max_length=200)
     comment = models.CharField(max_length=500, default="")
-    points_max_e = models.FloatField()
-    points_max_a = models.FloatField()
-    points_max_c = models.FloatField()
+    points_max_e = models.FloatField(default=0)
+    points_max_a = models.FloatField(default=0)
+    points_max_c = models.FloatField(default=0)
     # User can choose to set limits in the system or fix manually
     set_limit = models.BooleanField(default=False)
     points_grade_e_e = models.FloatField(default=0) # E requires only E-points
