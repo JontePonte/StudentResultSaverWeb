@@ -24,8 +24,11 @@
         </div>
     </div>
     
-    <!-- List of students -->
-    <table class="table">
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12">
+    <div class="overflow-scroll">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Student</th>
@@ -44,7 +47,8 @@
                 </th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="table-group-divider">
+            <!-- List of students -->
             {% for student in gr.student.all %}
             <tr>
                 <th><a href="/student/{{student.id}}">{{student.first_name}} {{student.last_name}}</a></th>
@@ -65,5 +69,9 @@
             </tr>
         </tbody>
     </table>
+    </div>
+    </div>
+    </div>
+    </div>
 
 {% endblock %}
