@@ -11,3 +11,6 @@ class CreateNewStudent(forms.Form):
 
 class CreateNewExam(forms.Form):
     name = forms.CharField(max_length=100)
+
+class CreateNewAssignment(forms.Form):
+    name = forms.CharField(max_length=100)

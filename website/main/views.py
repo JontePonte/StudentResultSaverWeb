@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.http import HttpResponse
-from .forms import CreateNewGroup, CreateNewStudent, CreateNewExam
+from .forms import CreateNewGroup, CreateNewStudent, CreateNewExam, CreateNewAssignment
 from .models import Group, Student, Exam, ExamResult, Assignment, AssignmentResult
 
 
@@ -42,13 +42,22 @@ def group(response, id):
                 ex = Exam(name=name)
                 ex.save()
                 gr.exam.add(ex)
+        # Add assignment
+        elif response.POST.get("save_assignment"):
+            form_new_assignment = CreateNewAssignment(response.POST)
+            if form_new_assignment.is_valid():
+                name = form_new_assignment.cleaned_data["name"]
+                assignment = Assignment(name=name)
+                assignment.save()
+                gr.assignment.add(assignment)
     
     # Empty exam info
     form_new_student = CreateNewStudent()
     form_new_exam = CreateNewExam()
+    form_new_assignment = CreateNewAssignment
 
 
-    return render(response, "main/group.html", {"gr":gr, "form_new_student":form_new_student, "form_new_exam":form_new_exam})
+    return render(response, "main/group.html", {"gr":gr, "form_new_student":form_new_student, "form_new_exam":form_new_exam, "form_new_assignment":form_new_assignment})
 
 
 def student(response, id):

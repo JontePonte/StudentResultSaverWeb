@@ -32,13 +32,18 @@
         <thead>
             <tr>
                 <th>Student</th>
+                <!-- Display all exams-->
                 {% for exam in gr.exam.all %}
                 <th><a href="/exam/{{exam.id}}">{{exam.name}}</a></th>
                 {% endfor %}
+                <!-- Display all assignments -->
+                {% for assignment in gr.assignment.all %}
+                <th><a href="/assignment/{{assignment.id}}">{{assignment.name}}</a></th>
+                {% endfor %}
+                <!-- Add exam (trigger modal) -->
                 <th>
-                    <!-- Add exam (trigger modal) -->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_exam">Add Exam</button>
-                    <!-- Modal -->
+                    <!-- The pop up modal -->
                     <div class="modal fade" id="add_exam" tabindex="-1" aria-labelledby="add_exam_label" aria-hidden="true">
                         <div class="modal-dialog">
                         <div class="modal-content">
@@ -62,6 +67,34 @@
                         </div>
                     </div>
                 </th>
+                <!-- Add assignment (trigger modal) -->
+                <th>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_assignment">Add Assignment</button>
+                    <!-- The pop up modal -->
+                    <div class="modal fade" id="add_assignment" tabindex="-1" aria-labelledby="add_assignment_label" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="add_exam_label">Add assignment</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Add new exam -->
+                                <form method="post" name="save_assignment" class="form-group">
+                                    {% csrf_token %}
+                                    <div class="input-group mb-3">
+                                        {{form_new_assignment.name}} <!-- as_table, as_p, as_ul -->
+                                        <button type="submit", name="save_assignment" value="save_assignment" class="btn btn-success"><em>Add new assignment</em></button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </th>
+                
             </tr>
         </thead>
         <tbody class="table-group-divider">
