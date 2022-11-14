@@ -3,27 +3,64 @@
 {% block title %}{{st.first_name}}{{st.last_name}}{% endblock %}
 
 {% block content %}
-    
-    <!-- Name, Rename and Delete are in a single row -->
-    <div class="container">
-        <div class="row">
-            <form class="row g-3", method="POST">
-                {% csrf_token %}
-                <!-- Show name and enable rename student -->
-                <div class="col-auto">
-                    <h4><input type="text", name="rename_first", placeholder="{{st.first_name}}"></h4>
-                </div>
-                <div class="col-auto">
-                    <h4><input type="text", name="rename_last", placeholder="{{st.last_name}}"></h4>
-                </div>
-                <div class="col-auto">
-                    <button type="submit" name="save_rename" value="save_rename" class="btn btn-success">Rename</button>
-                </div>
-                <!-- Delete group -->
-                <div class="col-auto">
-                    <button type="submit" name="delete_student" value="delete_student" class="btn btn-danger">Delete</button>
-                </div>
-            </form>
-        </div>
+<!-- Name, Rename and Delete are in a single row -->
+<div class="container">
+    <div class="row">
+        <form class="row g-3", method="POST">
+            {% csrf_token %}
+            <!-- Show name and enable rename student -->
+            <div class="col-auto">
+                <h4><input type="text", name="rename_first", placeholder="{{st.first_name}}"></h4>
+            </div>
+            <div class="col-auto">
+                <h4><input type="text", name="rename_last", placeholder="{{st.last_name}}"></h4>
+            </div>
+            <div class="col-auto">
+                <button type="submit" name="save_rename" value="save_rename" class="btn btn-success">Rename</button>
+            </div>
+            <!-- Delete group -->
+            <div class="col-auto">
+                <button type="submit" name="delete_student" value="delete_student" class="btn btn-danger">Delete</button>
+            </div>
+        </form>
     </div>
+</div>
+<div class="container">
+    <div class="row">
+    <div class="col-lg-12">
+    <div class="overflow-scroll">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <!-- Display all exams-->
+                {% for exam in st.group.exam.all %}
+                <th><a href="/exam/{{exam.id}}">{{exam.name}}</a></th>
+                {% endfor %}
+                <!-- Display all assignments -->
+                {% for assignment in st.group.assignment.all %}
+                <th><a href="/assignment/{{assignment.id}}">{{assignment.name}}</a></th>
+                {% endfor %}                
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr>
+                <th><a href="/student/{{student.id}}">{{student.first_name}} {{student.last_name}}</a></th>
+                {% for exam in gr.exam.all %}
+                <td>
+                    <form method="post" name="save_exam_result" class="form-group">
+                    {% csrf_token %}
+                        <div class="input-group input-group-sm">
+                            <input type="float" aria-label="e_points_{{student.id}}" class="form-control" placeholder="0">
+                            <input type="float" aria-label="c_points_{{student.id}}" class="form-control" placeholder="0">
+                            <input type="float" aria-label="a_points_{{student.id}}" class="form-control" placeholder="0">
+                        </div>
+                    </form>
+                </td>
+                {% endfor %}
+                {% for assignment in gr.assignment.all %}
+                <td>E</td>
+                {% endfor %}
+            </tr>
+        </tbody>
+
 {% endblock %}
