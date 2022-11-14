@@ -36,14 +36,31 @@
                 <th><a href="/exam/{{exam.id}}">{{exam.name}}</a></th>
                 {% endfor %}
                 <th>
-                    <!-- Add new exam -->
-                    <form method="post" name="save_exam" class="form-group">
-                        {% csrf_token %}
-                        <div class="input-group mb-3">
-                            {{form_new_exam.name}} <!-- as_table, as_p, as_ul -->
-                            <button type="submit", name="save_exam" value="save_exam" class="btn btn-success"><em>Add new exam</em></button>
+                    <!-- Add exam (trigger modal) -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_exam">Add Exam</button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="add_exam" tabindex="-1" aria-labelledby="add_exam_label" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="add_exam_label">Add exam</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Add new exam -->
+                                <form method="post" name="save_exam" class="form-group">
+                                    {% csrf_token %}
+                                    <div class="input-group mb-3">
+                                        {{form_new_exam.name}} <!-- as_table, as_p, as_ul -->
+                                        <button type="submit", name="save_exam" value="save_exam" class="btn btn-success"><em>Add new exam</em></button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                            </div>
                         </div>
-                    </form>
+                    </div>
                 </th>
             </tr>
         </thead>
