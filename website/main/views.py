@@ -95,7 +95,6 @@ def exam(response, id):
     if not gr in response.user.group.all():
         return render(response, "main/groups/.html", {})
 
-
     if response.method == "POST":
         # Edit, delete exam
         if response.POST.get("save_rename"):
@@ -107,6 +106,28 @@ def exam(response, id):
             return HttpResponseRedirect(f"/group/{gr.id}")
 
     return render(response, "main/exam.html", {"exam":exam})
+
+
+def assignment(response, id):
+    assignment = Assignment.objects.get(id=id)
+    gr = assignment.group
+
+    # Safety check so user can't access each other groups
+    if not gr in response.user.group.all():
+        return render(response, "main/groups/.html", {})
+
+    if response.method == "POST":
+        # Edit, delete assignment
+        if response.POST.get("save_rename"):
+            txt = response.POST.get("rename")
+            assignment.name = txt
+            assignment.save()
+        elif response.POST.get("delete_assignment"):
+            assignment.delete()
+            return HttpResponseRedirect(f"/group/{gr.id}")
+
+    return render(response, "main/assignment.html", {"assignment":assignment})
+
 
 
 def groups(response):
