@@ -46,9 +46,9 @@ class ExamResult(models.Model):
     exam = models.ForeignKey(Exam, on_delete=models.SET_NULL, related_name="exam_result", null=True)
     student = models.ForeignKey(Student, on_delete=models.SET_NULL, related_name="exam_result", null=True)
     comment = models.CharField(max_length=500, default="")
-    points_e = models.FloatField()
-    points_c = models.FloatField()
-    points_a = models.FloatField()
+    points_e = models.FloatField(default=0)
+    points_c = models.FloatField(default=0)
+    points_a = models.FloatField(default=0)
     # Users can set custom max points if other exam version is used
     points_diff_max_e = models.FloatField(default=0)
     points_diff_max_c = models.FloatField(default=0)
