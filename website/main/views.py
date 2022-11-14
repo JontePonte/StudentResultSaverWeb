@@ -50,6 +50,9 @@ def group(response, id):
                 assignment = Assignment(name=name)
                 assignment.save()
                 gr.assignment.add(assignment)
+        # Save exam and assignment results
+        elif response.POST.get("save_all_results"):
+            pass
     
     # Empty form info
     form_new_student = CreateNewStudent()

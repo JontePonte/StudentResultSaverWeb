@@ -59,9 +59,9 @@
                     <form method="post" name="save_exam_result" class="form-group">
                     {% csrf_token %}
                         <div class="input-group input-group-sm">
-                            <input type="float" aria-label="e_points" class="form-control" placeholder="0">
-                            <input type="float" aria-label="c_points" class="form-control" placeholder="0">
-                            <input type="float" aria-label="a_points" class="form-control" placeholder="0">
+                            <input type="float" aria-label="e_points_{{student.id}}" class="form-control" placeholder="0">
+                            <input type="float" aria-label="c_points_{{student.id}}" class="form-control" placeholder="0">
+                            <input type="float" aria-label="a_points_{{student.id}}" class="form-control" placeholder="0">
                         </div>
                     </form>
                 </td>
