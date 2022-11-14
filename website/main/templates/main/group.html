@@ -62,20 +62,18 @@
                 {% endfor %}
             </tr>
             {% endfor %}
-            <tr>
-                <th>
-                    <!-- Add new student -->
-                    <form method="post" name="save_student" class="form-group">
-                        {% csrf_token %}
-                        <div class="input-group mb-3">
-                            {{form_new_student.first_name}} <!-- as_table, as_p, as_ul -->
-                            {{form_new_student.last_name}} <!-- as_table, as_p, as_ul -->
-                            <button type="submit", name="save_student" value="save_student" class="btn btn-success"><em>Add new student</em></button>
-                        </div>
-                    </form>
-                </th>
-            </tr>
         </tbody>
+        <caption>
+            <!-- Add new student -->
+            <form method="post" name="save_student" class="form-group">
+                {% csrf_token %}
+                <div class="input-group mb-3">
+                    {{form_new_student.first_name}} <!-- as_table, as_p, as_ul -->
+                    {{form_new_student.last_name}} <!-- as_table, as_p, as_ul -->
+                    <button type="submit", name="save_student" value="save_student" class="btn btn-success"><em>Add new student</em></button>
+                </div>
+            </form>
+        </caption>
     </table>
     </div>
     </div>
