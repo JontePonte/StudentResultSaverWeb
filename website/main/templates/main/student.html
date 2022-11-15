@@ -46,12 +46,12 @@
             <tr>
                 {% for exam in st.group.exam.all %}
                 <td>
-                    <form method="post" name="save_exam_result" class="form-group">
+                    <form method="post" name="save_exam_results" class="form-group">
                     {% csrf_token %}
                         <div class="input-group input-group-sm">
-                            <input type="float" aria-label="e_points_{{exam.id}}" class="form-control" placeholder="0">
-                            <input type="float" aria-label="c_points_{{exam.id}}" class="form-control" placeholder="0">
-                            <input type="float" aria-label="a_points_{{exam.id}}" class="form-control" placeholder="0">
+                            <input type="float" aria-label="points_e_{{exam.id}}" class="form-control" placeholder="{{st.exam_result.first.points_e}}">
+                            <input type="float" aria-label="points_c_{{exam.id}}" class="form-control" placeholder="0">
+                            <input type="float" aria-label="points_a_{{exam.id}}" class="form-control" placeholder="0">
                         </div>
                     </form>
                 </td>
@@ -64,7 +64,10 @@
         <caption>
             <form method="POST">
                 {% csrf_token %}
-                <button type="submit" name="delete_group" value="delete_group" class="btn btn-success">Save Results</button>
+                {{form_add_exam_result.points_e}}
+                {{form_add_exam_result.points_c}}
+                {{form_add_exam_result.points_a}}
+                <button type="submit" name="save_exam_results" value="save_exam_results" class="btn btn-success">Save Results</button>
             </form>
         </caption>
     </table>

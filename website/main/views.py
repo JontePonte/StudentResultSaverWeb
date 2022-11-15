@@ -72,6 +72,7 @@ def group(response, id):
         "form_add_assignment_result":form_add_assignment_result,
         })
 
+
 def student(response, id):
     st = Student.objects.get(id=id)
     gr = st.group
@@ -92,11 +93,32 @@ def student(response, id):
             st.first_name = first_new
             st.last_name = last_new
             st.save()
+        # Delete student
         elif response.POST.get("delete_student"):
             st.delete()
             return HttpResponseRedirect(f"/group/{gr.id}")
+        # Save student results
+        elif response.POST.get("save_exam_results"):
+            print("first")
+            for exam in gr.exam.all():
+                form_add_exam_result = AddExamResult(response.POST)
+                print("second")
+                if form_add_exam_result.is_valid():
+                    er = ExamResult(exam=exam, student=st)
+                    points_e_str = form_add_exam_result.data["points_e"]
+                    er.points_e = float(points_e_str)
+                    print("före")
+                    print(er.points_e)
+                    print("efter")
+                    er.save()
+    
+    form_add_exam_result = AddExamResult()
 
-    return render(response, "main/student.html", {"st":st,})
+    return render(response, "main/student.html", 
+    {
+        "st":st,
+        "form_add_exam_result": form_add_exam_result,
+        })
 
 
 def exam(response, id):
