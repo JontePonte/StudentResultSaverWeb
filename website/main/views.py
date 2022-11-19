@@ -111,7 +111,14 @@ def student(response, id):
                     er.points_e = form_add_exam_result.data["points_e"]
                     er.points_c = form_add_exam_result.data["points_c"]
                     er.points_a = form_add_exam_result.data["points_a"]
+
+                    print(er.points_e)
+                    print(er.points_c)
+                    print(er.points_a)
+
+                    # print(response.POST.get(f"points_e_{exam.id}"))
                     er.save()
+    
     
     form_add_exam_result = AddExamResult()
 
