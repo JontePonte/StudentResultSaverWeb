@@ -64,10 +64,8 @@
         <caption>
             <form method="POST">
                 {% csrf_token %}
-                {{form_add_exam_result.points_e}}
-                {{form_add_exam_result.points_c}}
-                {{form_add_exam_result.points_a}}
                 <button type="submit" name="save_exam_results" value="save_exam_results" class="btn btn-success">Save Results</button>
+                {{form_add_exam_result}}
             </form>
         </caption>
     </table>

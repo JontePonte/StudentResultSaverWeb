@@ -99,18 +99,22 @@ def student(response, id):
             return HttpResponseRedirect(f"/group/{gr.id}")
         # Save student results
         elif response.POST.get("save_exam_results"):
-            print("first")
             for exam in gr.exam.all():
                 form_add_exam_result = AddExamResult(response.POST)
-                print("second")
                 if form_add_exam_result.is_valid():
-                    er = ExamResult(exam=exam, student=st)
-                    points_e_str = form_add_exam_result.data["points_e"]
-                    er.points_e = float(points_e_str)
-                    print("före")
-                    print(er.points_e)
-                    print("efter")
-                    er.save()
+                    points_e = form_add_exam_result.data["points_e"]
+                    # Create new result if it doesn't exist
+                    if not st.exam_result.filter(exam=exam):
+                        er = ExamResult(exam=exam, student=st)
+                        er.points_e = points_e
+                        er.save()
+                        print("New result created")
+                    # Select result if it already exists
+                    else:
+                        er = st.exam_result.filter(exam=exam).first()
+                        er.points_e = points_e
+                        er.save()
+                        print("Old result updated")
     
     form_add_exam_result = AddExamResult()
 
