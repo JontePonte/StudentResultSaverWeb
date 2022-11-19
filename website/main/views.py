@@ -102,19 +102,16 @@ def student(response, id):
             for exam in gr.exam.all():
                 form_add_exam_result = AddExamResult(response.POST)
                 if form_add_exam_result.is_valid():
-                    points_e = form_add_exam_result.data["points_e"]
-                    # Create new result if it doesn't exist
+                    # Create new result if it doesn't exist. Else select right result
                     if not st.exam_result.filter(exam=exam):
                         er = ExamResult(exam=exam, student=st)
-                        er.points_e = points_e
-                        er.save()
-                        print("New result created")
-                    # Select result if it already exists
                     else:
                         er = st.exam_result.filter(exam=exam).first()
-                        er.points_e = points_e
-                        er.save()
-                        print("Old result updated")
+                    
+                    er.points_e = form_add_exam_result.data["points_e"]
+                    er.points_c = form_add_exam_result.data["points_c"]
+                    er.points_a = form_add_exam_result.data["points_a"]
+                    er.save()
     
     form_add_exam_result = AddExamResult()
 

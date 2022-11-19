@@ -50,8 +50,8 @@
                     {% csrf_token %}
                         <div class="input-group input-group-sm">
                             <input type="float" aria-label="points_e_{{exam.id}}" class="form-control" placeholder="{{st.exam_result.first.points_e}}">
-                            <input type="float" aria-label="points_c_{{exam.id}}" class="form-control" placeholder="0">
-                            <input type="float" aria-label="points_a_{{exam.id}}" class="form-control" placeholder="0">
+                            <input type="float" aria-label="points_c_{{exam.id}}" class="form-control" placeholder="{{st.exam_result.first.points_c}}">
+                            <input type="float" aria-label="points_a_{{exam.id}}" class="form-control" placeholder="{{st.exam_result.first.points_a}}">
                         </div>
                     </form>
                 </td>
