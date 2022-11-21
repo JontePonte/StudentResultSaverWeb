@@ -45,13 +45,17 @@
         <tbody class="table-group-divider">
             <tr>
                 {% for exam in st.group.exam.all %}
-                <td>
+                <td>                            
                     <form method="post" class="form-group">
                     {% csrf_token %}
                         <div class="input-group input-group-sm">
-                            <input type="float" name="points_c_{{exam.id}}" class="form-control" form="form_add_exam_result" placeholder="{{st.exam_result.first.points_c}}">
-                            <input type="float" name="points_a_{{exam.id}}" class="form-control" form="form_add_exam_result" placeholder="{{st.exam_result.first.points_a}}">
-                            <input type="float" name="points_e_{{exam.id}}" class="form-control" form="form_add_exam_result" placeholder="{{st.exam_result.first.points_e}}">
+                            {% for exam_result in st.exam_result.all %}
+                            {% if exam_result.exam.id == exam.id %}
+                            <input type="float" name="points_c_{{exam.id}}" class="form-control" form="form_add_exam_result" placeholder="{{exam_result.points_e}}">
+                            <input type="float" name="points_a_{{exam.id}}" class="form-control" form="form_add_exam_result" placeholder="{{exam_result.points_c}}">
+                            <input type="float" name="points_e_{{exam.id}}" class="form-control" form="form_add_exam_result" placeholder="{{exam_result.points_a}}">
+                            {% endif %}
+                            {% endfor %}
                         </div>
                     </form>
                 </td>
