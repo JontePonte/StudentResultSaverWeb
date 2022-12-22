@@ -25,10 +25,14 @@
         </form>
     </div>
 </div>
+
 <div class="container">
     <div class="row">
     <div class="col-lg-12">
     <div class="overflow-scroll">
+    <!-- The entire table is a form -->
+    <form method="post" class="form-group">
+    {% csrf_token %}
     <table class="table table-striped">
         <thead>
             <tr>
@@ -43,35 +47,27 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
+            <!-- One row for the results -->
             <tr>
                 {% for exam in st.group.exam.all %}
-                <td>                            
-                    <form method="post" class="form-group">
-                    {% csrf_token %}
+                    <td>                            
                         <div class="input-group input-group-sm">
-                            {% for exam_result in st.exam_result.all %}
-                            {% if exam_result.exam.id == exam.id %}
-                            <input type="float" name="points_c_{{exam.id}}" class="form-control" form="form_add_exam_result" placeholder="{{exam_result.points_e}}">
-                            <input type="float" name="points_a_{{exam.id}}" class="form-control" form="form_add_exam_result" placeholder="{{exam_result.points_c}}">
-                            <input type="float" name="points_e_{{exam.id}}" class="form-control" form="form_add_exam_result" placeholder="{{exam_result.points_a}}">
-                            {% endif %}
-                            {% endfor %}
+                            <input type="float" name="points_c_{{exam.id}}" class="form-control" form="form_add_exam_result" placeholder="{{exam.exam_result.first.points_e}}">
+                            <input type="float" name="points_a_{{exam.id}}" class="form-control" form="form_add_exam_result" placeholder="{{exam.exam_result.first.points_c}}">
+                            <input type="float" name="points_e_{{exam.id}}" class="form-control" form="form_add_exam_result" placeholder="{{exam.exam_result.first.points_a}}">
                         </div>
-                    </form>
-                </td>
+                    </td>
                 {% endfor %}
                 {% for assignment in st.group.assignment.all %}
-                <td>E</td>
+                    <td>E</td>
                 {% endfor %}
             </tr>
         </tbody>
         <caption>
-            <form method="POST">
-                {% csrf_token %}
-                <button type="submit" name="save_exam_results" value="save_exam_results" class="btn btn-success">Save Results</button>
-                <!-- {{form_add_exam_result}} -->
-            </form>
+            <button type="submit" name="save_exam_results" value="save_exam_results" class="btn btn-success">Save Results</button>
+            <!-- {{form_add_exam_result}} -->
         </caption>
     </table>
+    </form>
 
 {% endblock %}

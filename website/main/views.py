@@ -77,12 +77,25 @@ def student(response, id):
     st = Student.objects.get(id=id)
     gr = st.group
 
+    # Create dict with all student exam results
+    exams = {}
+    for exam in gr.exam.all():
+        student_result = {}
+        exams[exam.id] = student_result
+        for exam_result in exam.exam_result.all():
+            if exam_result in st.exam_result.all():
+                student_result["exam_id"] = exam.id
+                student_result["points_e"] = exam_result.points_e
+                student_result["points_c"] = exam_result.points_c
+                student_result["points_a"] = exam_result.points_a
+
     # Safety check so user can't access each other groups
     if not gr in response.user.group.all():
         return render(response, "main/groups.html", {})
 
     if response.method == "POST":
         if response.POST.get("save_rename"):
+            print("save rename")
             first_new = response.POST.get("rename_first")
             last_new = response.POST.get("rename_last")
             # First and last name is not changed if input is empty
@@ -99,6 +112,7 @@ def student(response, id):
             return HttpResponseRedirect(f"/group/{gr.id}")
         # Save student results
         elif response.POST.get("save_exam_results"):
+            print("save result")
             for exam in gr.exam.all():
                 form_add_exam_result = AddExamResult(response.POST)
                 if form_add_exam_result.is_valid():
@@ -126,6 +140,7 @@ def student(response, id):
     {
         "st":st,
         "form_add_exam_result": form_add_exam_result,
+        "exams": exams,
         })
 
 
