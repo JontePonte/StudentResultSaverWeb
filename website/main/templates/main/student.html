@@ -10,17 +10,17 @@
             {% csrf_token %}
             <!-- Show name and enable rename student -->
             <div class="col-auto">
-                <h4><input type="text", name="rename_first", placeholder="{{st.first_name}}"></h4>
+                <h4><input type="text", name="rename_first", value="{{st.first_name}}"></h4>
             </div>
             <div class="col-auto">
-                <h4><input type="text", name="rename_last", placeholder="{{st.last_name}}"></h4>
+                <h4><input type="text", name="rename_last", value="{{st.last_name}}"></h4>
             </div>
             <div class="col-auto">
-                <button type="submit" name="save_rename" value="save_rename" class="btn btn-success">Rename</button>
+                <button type="submit", name="save_rename", value="save_rename" class="btn btn-success">Rename</button>
             </div>
             <!-- Delete group -->
             <div class="col-auto">
-                <button type="submit" name="delete_student" value="delete_student" class="btn btn-danger">Delete</button>
+                <button type="submit", name="delete_student", value="delete_student", class="btn btn-danger">Delete</button>
             </div>
         </form>
     </div>
@@ -52,9 +52,9 @@
                 {% for exam in st.group.exam.all %}
                     <td>                            
                         <div class="input-group input-group-sm">
-                            <input type="float" name="points_c_{{exam.id}}" class="form-control" form="form_add_exam_result" placeholder="{{exam.exam_result.first.points_e}}">
-                            <input type="float" name="points_a_{{exam.id}}" class="form-control" form="form_add_exam_result" placeholder="{{exam.exam_result.first.points_c}}">
-                            <input type="float" name="points_e_{{exam.id}}" class="form-control" form="form_add_exam_result" placeholder="{{exam.exam_result.first.points_a}}">
+                            <input type="float", name="points_e_{{exam.id}}", class="form-control", value="{{exam.exam_result.first.points_e}}">
+                            <input type="float", name="points_c_{{exam.id}}", class="form-control", value="{{exam.exam_result.first.points_c}}">
+                            <input type="float", name="points_a_{{exam.id}}", class="form-control", value="{{exam.exam_result.first.points_a}}">
                         </div>
                     </td>
                 {% endfor %}
@@ -64,7 +64,7 @@
             </tr>
         </tbody>
         <caption>
-            <button type="submit" name="save_exam_results" value="save_exam_results" class="btn btn-success">Save Results</button>
+            <button type="submit" name="save_exam_results" value="save_exam_results"" class="btn btn-success">Save Results</button>
             <!-- {{form_add_exam_result}} -->
         </caption>
     </table>

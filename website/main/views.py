@@ -114,24 +114,21 @@ def student(response, id):
         elif response.POST.get("save_exam_results"):
             print("save result")
             for exam in gr.exam.all():
-                form_add_exam_result = AddExamResult(response.POST)
-                if form_add_exam_result.is_valid():
-                    # Create new result if it doesn't exist. Else select right result
-                    if not st.exam_result.filter(exam=exam):
-                        er = ExamResult(exam=exam, student=st)
-                    else:
-                        er = st.exam_result.filter(exam=exam).first()
-                    
-                    er.points_e = form_add_exam_result.data["points_e"]
-                    er.points_c = form_add_exam_result.data["points_c"]
-                    er.points_a = form_add_exam_result.data["points_a"]
+                # Create new result if it doesn't exist. Else select right result
+                if not st.exam_result.filter(exam=exam):
+                    er = ExamResult(exam=exam, student=st)
+                else:
+                    er = st.exam_result.filter(exam=exam).first()
+                
+                er.points_e = response.POST.get(f"points_e_{exam.id}")
+                er.points_c = response.POST.get(f"points_c_{exam.id}")
+                er.points_a = response.POST.get(f"points_a_{exam.id}")
 
-                    print(er.points_e)
-                    print(er.points_c)
-                    print(er.points_a)
+                print(er.points_e)
+                print(er.points_c)
+                print(er.points_a)
 
-                    # print(response.POST.get(f"points_e_{exam.id}"))
-                    er.save()
+                er.save()
     
     
     form_add_exam_result = AddExamResult()
