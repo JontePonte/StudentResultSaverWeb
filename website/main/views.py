@@ -1,5 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.http import HttpResponse
+from django.template.defaulttags import register
+
 from .forms import CreateNewGroup, CreateNewStudent, CreateNewExam, CreateNewAssignment, AddExamResult, AddAssignmentResult
 from .models import Group, Student, Exam, ExamResult, Assignment, AssignmentResult
 
@@ -124,14 +126,10 @@ def student(response, id):
                 er.points_c = response.POST.get(f"points_c_{exam.id}")
                 er.points_a = response.POST.get(f"points_a_{exam.id}")
 
-                print(er.points_e)
-                print(er.points_c)
-                print(er.points_a)
-
                 er.save()
     
     
-    form_add_exam_result = AddExamResult()
+    form_add_exam_result = AddExamResult() # probably unnecessary
 
     # Extract student exam results
     exam_results = {}
@@ -143,8 +141,11 @@ def student(response, id):
             "exam.id": exam.id,
         }
     
-    print(exam_results)
-    
+    # Add function to allow filtering of dicts
+    @register.filter
+    def get_item(dictionary, key):
+        return dictionary.get(key)
+
     return render(response, "main/student.html", 
     {
         "st":st,
