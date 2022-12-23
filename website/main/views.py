@@ -79,18 +79,6 @@ def student(response, id):
     st = Student.objects.get(id=id)
     gr = st.group
 
-    # Create dict with all student exam results
-    exams = {}
-    for exam in gr.exam.all():
-        student_result = {}
-        exams[exam.id] = student_result
-        for exam_result in exam.exam_result.all():
-            if exam_result in st.exam_result.all():
-                student_result["exam_id"] = exam.id
-                student_result["points_e"] = exam_result.points_e
-                student_result["points_c"] = exam_result.points_c
-                student_result["points_a"] = exam_result.points_a
-
     # Safety check so user can't access each other groups
     if not gr in response.user.group.all():
         return render(response, "main/groups.html", {})
@@ -131,23 +119,20 @@ def student(response, id):
     
     form_add_exam_result = AddExamResult() # probably unnecessary
 
+
     # Extract student exam results
     exam_results = {}
     for exam in gr.exam.all():
         # Make sure a result exists
-        try:
-            points_e = ExamResult.objects.filter(student=st).filter(exam=exam).first().points_e,
-        except:
+        if ExamResult.objects.filter(student=st).filter(exam=exam).first():
+            points_e = ExamResult.objects.filter(student=st).filter(exam=exam).first().points_e
+            points_c = ExamResult.objects.filter(student=st).filter(exam=exam).first().points_c
+            points_a = ExamResult.objects.filter(student=st).filter(exam=exam).first().points_a
+        else:
             points_e = 0
-        try:
-            points_c = ExamResult.objects.filter(student=st).filter(exam=exam).first().points_c,
-        except:
             points_c = 0
-        try:
-            points_a = ExamResult.objects.filter(student=st).filter(exam=exam).first().points_a,
-        except:
             points_a = 0
-
+        
         # Save results in dict for each exam
         exam_results[exam.id] = {
             "points_e": points_e,
@@ -161,11 +146,11 @@ def student(response, id):
     def get_item(dictionary, key):
         return dictionary.get(key)
 
+
     return render(response, "main/student.html", 
     {
         "st":st,
         "form_add_exam_result": form_add_exam_result,
-        "exams": exams,
         "exam_results": exam_results,
         })
 

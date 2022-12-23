@@ -52,9 +52,9 @@
                 {% for exam_id in exam_results.keys %}
                     <td>                            
                         <div class="input-group input-group-sm">
-                            <input type="float", name="points_e_{{exam_id}}", class="form-control", value={{exam_results|get_item:exam_id|get_item:'points_e'}}>
-                            <input type="float", name="points_c_{{exam_id}}", class="form-control", value={{exam_results|get_item:exam_id|get_item:'points_c'}}>
-                            <input type="float", name="points_a_{{exam_id}}", class="form-control", value={{exam_results|get_item:exam_id|get_item:'points_a'}}>
+                            <input type="float", name="points_e_{{exam_id}}", class="form-control", value={{ exam_results|get_item:exam_id|get_item:"points_e" }}>
+                            <input type="float", name="points_c_{{exam_id}}", class="form-control", value={{ exam_results|get_item:exam_id|get_item:"points_c" }}>
+                            <input type="float", name="points_a_{{exam_id}}", class="form-control", value={{ exam_results|get_item:exam_id|get_item:"points_a" }}>
                         </div>
                     </td>
                 {% endfor %}
