@@ -49,12 +49,12 @@
         <tbody class="table-group-divider">
             <!-- One row for the results -->
             <tr>
-                {% for exam in st.group.exam.all %}
+                {% for exam_id in exam_results.keys %}
                     <td>                            
                         <div class="input-group input-group-sm">
-                            <input type="float", name="points_e_{{exam.id}}", class="form-control", value="{{exam.exam_result.first.points_e}}">
-                            <input type="float", name="points_c_{{exam.id}}", class="form-control", value="{{exam.exam_result.first.points_c}}">
-                            <input type="float", name="points_a_{{exam.id}}", class="form-control", value="{{exam.exam_result.first.points_a}}">
+                            <input type="float", name="points_e_{{exam_id}}", class="form-control", value="{{exam_result.exam_id.points_e}}">
+                            <input type="float", name="points_c_{{exam_id}}", class="form-control", value="{{exam_result.exam_id.points_c}}">
+                            <input type="float", name="points_a_{{exam_id}}", class="form-control", value="{{exam_result.exam_id.points_a}}">
                         </div>
                     </td>
                 {% endfor %}

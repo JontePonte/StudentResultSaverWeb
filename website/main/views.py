@@ -133,11 +133,24 @@ def student(response, id):
     
     form_add_exam_result = AddExamResult()
 
+    # Extract student exam results
+    exam_results = {}
+    for exam in gr.exam.all():
+        exam_results[exam.id] = {
+            "points_e": ExamResult.objects.filter(student=st).filter(exam=exam).first().points_e,
+            "points_c": ExamResult.objects.filter(student=st).filter(exam=exam).first().points_c,
+            "points_a": ExamResult.objects.filter(student=st).filter(exam=exam).first().points_a,
+            "exam.id": exam.id,
+        }
+    
+    print(exam_results)
+    
     return render(response, "main/student.html", 
     {
         "st":st,
         "form_add_exam_result": form_add_exam_result,
         "exams": exams,
+        "exam_results": exam_results,
         })
 
 
