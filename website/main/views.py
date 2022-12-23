@@ -134,11 +134,26 @@ def student(response, id):
     # Extract student exam results
     exam_results = {}
     for exam in gr.exam.all():
+        # Make sure a result exists
+        try:
+            points_e = ExamResult.objects.filter(student=st).filter(exam=exam).first().points_e,
+        except:
+            points_e = 0
+        try:
+            points_c = ExamResult.objects.filter(student=st).filter(exam=exam).first().points_c,
+        except:
+            points_c = 0
+        try:
+            points_a = ExamResult.objects.filter(student=st).filter(exam=exam).first().points_a,
+        except:
+            points_a = 0
+
+        # Save results in dict for each exam
         exam_results[exam.id] = {
-            "points_e": ExamResult.objects.filter(student=st).filter(exam=exam).first().points_e,
-            "points_c": ExamResult.objects.filter(student=st).filter(exam=exam).first().points_c,
-            "points_a": ExamResult.objects.filter(student=st).filter(exam=exam).first().points_a,
-            "exam.id": exam.id,
+            "points_e": points_e,
+            "points_c": points_c,
+            "points_a": points_a,
+            "exam.id": exam.id, # probably unnecessary
         }
     
     # Add function to allow filtering of dicts
